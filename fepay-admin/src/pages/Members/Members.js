@@ -9,38 +9,11 @@ import Logo from '../../Assets/Logo.png';
 
 
 const AnalyticsPage = () => {
-  const [memberData, setMemberData] = useState([
-    {
-      user_id: '1',
-      name: 'TEST아이디',
-      phone: '01000000000',
-      balance: '15000',
-    },
-    {
-      user_id: '2',
-      name: 'TEST아이디',
-      phone: '01000000000',
-      balance: '15000',
-    },
-    {
-      user_id: '3',
-      name: 'TEST아이디',
-      phone: '01000000000',
-      balance: '15000',
-    },
-    {
-      user_id: '4',
-      name: 'TEST아이디',
-      phone: '01000000000',
-      balance: '15000',
-    },
-    {
-      user_id: '5',
-      name: 'TEST아이디',
-      phone: '01000000000',
-      balance: '15000',
-    },
-  ]);
+  const [memberData, setMemberData] = useState([]);
+
+  useEffect(() => {
+    updateData();
+  }, []);
 
   const updateData = async () => {
     const requestUrl = `${SERVER}/users`;
@@ -49,7 +22,10 @@ const AnalyticsPage = () => {
     }, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access')}`,
-      }
+      },
+      timeout: 3000,
+    }).catch(() => {
+      window.location = '/';
     });
 
     const memberArray = respData.data;
@@ -86,8 +62,6 @@ const AnalyticsPage = () => {
   const handleUserDelete = (memberId) => {
     alert(`사용자 삭제: ${memberId}`);
   }
-
-  useEffect(updateData, []);
 
   return (
     <div className='Members-base'>
