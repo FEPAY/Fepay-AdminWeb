@@ -54,8 +54,29 @@ const AnalyticsPage = () => {
     }
   }
 
-  const handleMoneyChange = (memberId) => {
-    alert(`사용자 잔고 변경: ${memberId}`);
+  const handleMoneyChange = async (memberId) => {
+    const result = prompt(`${memberId}의 잔고를 수정합니다.\n설정할 잔고를 입력하세요!`);
+
+    if (!result) {
+      alert("잔고 수정이 취소되었습니다.");
+      return;
+    }
+
+    if(result === "") {
+      alert("설정할 잔고를 입력하세요.");
+      return;
+    }
+
+    const requestUrl = `${SERVER}/user/balance?user_id=${memberId}`;
+    await Axios.put(requestUrl, {
+      balance: result,
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+      }
+    });
+
+    await updateData();
   }
 
   const handleUserDelete = (memberId) => {
