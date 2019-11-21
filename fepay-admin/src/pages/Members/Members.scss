@@ -1,0 +1,54 @@
+.Analytics-base {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  & .topBar {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 2rem;
+    background: #fafafa;
+    box-shadow: 0.1rem 0.2rem #fafafa;
+    font-weight: bold;
+    color: #212121;
+
+    & .logo {
+      margin-left: 1.5rem;
+      cursor: pointer;
+
+      &:hover {
+        color: blueviolet;
+      }
+    }
+
+    & .memberMgnt {
+      margin-left: 1.5rem;
+      cursor: pointer;
+
+      &:hover {
+        color: blueviolet;
+      }
+    }
+  }
+
+  & .content {
+    width: 100%;
+    padding: 1.5rem;
+
+    & .section {
+      width: 100%;
+      margin-bottom: 2.5rem;
+
+      & .table {
+        width: 100%;
+
+        & .btn-margin {
+          margin-right: 0.5em;
+        }
+      }
+    }
+  }
+}
