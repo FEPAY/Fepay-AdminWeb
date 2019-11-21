@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { FaUserLock } from 'react-icons/fa';
-import { Button, TextField, Modal, Paper } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import Logo from '../../Assets/Logo.png';
 import Moment from 'moment';
 import Axios from 'axios'
@@ -51,7 +50,7 @@ const LoginPage = () => {
     <div className='login-base'>
       <div className='box'>
         <div className='icon'>
-          <img src={Logo} />
+          <img src={Logo} alt='logo'/>
         </div>
         <div className='title'>
           <h2>행사 등록하기</h2>

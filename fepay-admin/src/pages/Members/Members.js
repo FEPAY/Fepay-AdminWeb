@@ -95,7 +95,7 @@ const AnalyticsPage = () => {
         <div className='logo' onClick={() => {
           window.location.href = '/analytics';
         }}>
-          <img src={Logo} className='image'/>
+          <img src={Logo} className='image' alt='logo'/>
           <span className='text'>FEPAY ADMIN</span>
         </div>
         <div className='memberMgnt' onClick={() => {

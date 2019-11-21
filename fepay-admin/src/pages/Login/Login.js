@@ -31,7 +31,7 @@ const LoginPage = () => {
     <div className='login-base'>
       <div className='box'>
         <div className='icon'>
-          <img src={Logo} />
+          <img src={Logo} alt='logo'/>
         </div>
         <div className='title'>
           <h2>관리자 로그인</h2>

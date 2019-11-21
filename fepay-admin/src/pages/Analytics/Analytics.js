@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Paper, Table, TableBody, TableCell, TableHead, TableRow, Button } from '@material-ui/core'
+import { Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
 import { FaBarcode, FaMoneyBill, FaMoneyCheckAlt } from 'react-icons/fa'
 import Axios from 'axios';
 
@@ -39,7 +39,7 @@ const AnalyticsPage = () => {
     <div className='Analytics-base'>
       <div className='topBar'>
         <div className='logo'>
-          <img src={Logo} className='image' />
+          <img src={Logo} className='image' alt='logo' />
           <span className='text'>FEPAY ADMIN</span>
         </div>
         <div className='memberMgnt' onClick={() => {
