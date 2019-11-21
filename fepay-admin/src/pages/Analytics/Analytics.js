@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Paper, Table, TableBody, TableCell, TableHead, TableRow, Button } from '@material-ui/core'
+import { FaBarcode, FaMoneyBill, FaMoneyCheckAlt } from 'react-icons/fa'
 import Axios from 'axios';
+
+import Logo from '../../Assets/Logo.png';
 import './Analytics.scss';
 
 const AnalyticsPage = () => {
@@ -36,7 +39,8 @@ const AnalyticsPage = () => {
     <div className='Analytics-base'>
       <div className='topBar'>
         <div className='logo'>
-          FEPAY ADMIN
+          <img src={Logo} className='image' />
+          <span className='text'>FEPAY ADMIN</span>
         </div>
         <div className='memberMgnt' onClick={() => {
           window.location.href = '/members';
@@ -44,11 +48,18 @@ const AnalyticsPage = () => {
           회원 관리
         </div>
       </div>
-      <br />
+      <div className='topBar-secound'>
+        <div className='content-topbar'>
+          <FaBarcode />
+          &nbsp;<span>행사 코드: <strong>010101</strong></span>
+        </div>
+      </div>
       <div className='content'>
-        <h4>행사 코드: 010101</h4>
         <div className='section'>
-          <h3>잔고 랭킹</h3>
+          <div className='section-title'>
+            <FaMoneyCheckAlt />
+            &nbsp;<h3>잔고 랭킹</h3>
+          </div>
           <Paper className='table'>
             <Table>
               <TableHead>
@@ -64,7 +75,7 @@ const AnalyticsPage = () => {
                       <TableCell component="th" scope="row">
                         {row.auction}
                       </TableCell>
-                      <TableCell align="right">{row.memberID}</TableCell>
+                      <TableCell align="right">{row.price} 원</TableCell>
                     </TableRow>
                   ))
                 }
@@ -73,7 +84,10 @@ const AnalyticsPage = () => {
           </Paper>
         </div>
         <div className='section'>
-          <h3>거래 내역</h3>
+          <div className='section-title'>
+            <FaMoneyBill />
+            &nbsp;<h3>거래 내역</h3>
+          </div>
           <Paper className='table'>
             <Table>
               <TableHead>

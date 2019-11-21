@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Paper, Table, TableBody, TableCell, TableHead, TableRow, Button } from '@material-ui/core'
-import {SERVER} from '../../config/server.json';
-import './Members.scss';
+import { FaUser } from 'react-icons/fa'
 import Axios from 'axios';
+
+import { SERVER } from '../../config/server.json';
+import './Members.scss';
+import Logo from '../../Assets/Logo.png';
+
 
 const AnalyticsPage = () => {
   const [memberData, setMemberData] = useState([
@@ -86,12 +90,13 @@ const AnalyticsPage = () => {
   useEffect(updateData, []);
 
   return (
-    <div className='Analytics-base'>
+    <div className='Members-base'>
       <div className='topBar'>
         <div className='logo' onClick={() => {
           window.location.href = '/analytics';
         }}>
-          FEPAY ADMIN
+          <img src={Logo} className='image'/>
+          <span className='text'>FEPAY ADMIN</span>
         </div>
         <div className='memberMgnt' onClick={() => {
           window.location.href = '/members';
@@ -101,9 +106,11 @@ const AnalyticsPage = () => {
       </div>
       <br />
       <div className='content'>
-        <h4>행사 코드: 010101</h4>
         <div className='section'>
-          <h3>회원 관리</h3>
+          <div className='section-title'>
+            <FaUser />
+            &nbsp;<h3>회원 관리</h3>
+          </div>
           <Paper className='table'>
             <Table>
               <TableHead>
