@@ -17,6 +17,7 @@ const LoginPage = () => {
   const handleLogin = async () => {
     if (!email || !password) {
       alert('입력 값을 확인하십시오.');
+      return;
     }
 
     const respData = await Axios.post(`${SERVER}/admin/auth`, {
@@ -42,7 +43,6 @@ const LoginPage = () => {
         }
       });
 
-      console.log(respEventID.data.festivalId);
       if (!respEventID.data.festivalId) {
         alert('로그인에 실패하였습니다.');
         localStorage.setItem('access', null);
@@ -52,6 +52,7 @@ const LoginPage = () => {
       localStorage.setItem('eventID', respEventID.data.festivalId)
 
       window.location.href = '/analytics';
+      return;
     }
 
     alert('로그인에 실패하였습니다.');
@@ -64,7 +65,7 @@ const LoginPage = () => {
           <img src={Logo} alt='logo' />
         </div>
         <div className='title'>
-          <h2>관리자 로그인</h2>
+          <h2>행사 관리자 로그인</h2>
         </div>
         <form className='login-form'>
           <TextField
