@@ -1,0 +1,38 @@
+sudo: required
+dist: trusty
+language: node_js
+
+node_js:
+  - "stable"
+
+cache:
+  directories:
+    - node_modules
+
+install:
+  - cd fepay-admin
+  - npm install
+  - npm i -g react-deploy-cli
+  - npm run build
+  - yarn test --passWithNoTests
+  
+script:
+  - echo "skipping tests"
+
+deploy:
+  - skip_cleanup: true
+    provider: s3
+    access_key_id: "$S3_ACCESS_KEY_ID"
+    secret_access_key: "$S3_SECRET_ACCESS_KEY"
+    bucket: "fepay.jaehoon.kim"
+    region: ap-northeast-2
+    local_dir: build
+    on:
+      branch:
+        - master
+
+  - skip_cleanup: true
+    provider: script
+    script: npm build
+    on:
+      all_branches: true
