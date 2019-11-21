@@ -22,6 +22,13 @@ const LoginPage = () => {
       return;
     }
 
+    const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+    if (!emailRegex.test(email)) {
+      alert('이메일을 확인하여 주십시오.');
+      return;
+    }
+
     if(Moment.duration(Moment(new Date()).diff(Moment(eventEndDate, 'YYYY-MM-DD'))).asHours() <= 0) {
       alert('마감 날자는 오늘 날자보다 작을 수 없습니다.');
       return;
