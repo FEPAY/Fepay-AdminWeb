@@ -151,8 +151,8 @@ const AnalyticsPage = () => {
                         {row.id}
                       </TableCell>
                       <TableCell align="right">{row.recipient}</TableCell>
-                      <TableCell align="right">{row.sender}</TableCell>
-                      <TableCell align="right">{Moment(row.matchedAt).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
+                      <TableCell align="right">{row.sender !== null ? row.sender : '구매 대기'}</TableCell>
+                      <TableCell align="right">{row.sender !== null ? Moment(row.matchedAt).format('YYYY-MM-DD HH:mm:ss') : '구매 대기'}</TableCell>
                       <TableCell align="right">{`${row.amount} 원`}</TableCell>
                     </TableRow>
                   ))
