@@ -26,7 +26,7 @@ const AnalyticsPage = () => {
 
     if (topRespResult) {
       if (!topRespResult.data) {
-        setTopData(null);
+        setTopData([]);
         return;
       }
 
@@ -34,7 +34,7 @@ const AnalyticsPage = () => {
       return;
     }
 
-    setTopData(null);
+    setTopData([]);
   }
 
   const getSellData = async () => {
@@ -44,12 +44,12 @@ const AnalyticsPage = () => {
       },
       timeout: 3000,
     }).catch(() => {
-      window.location.href = '/';
+      // window.location.href = '/';
     });
 
     if (sellRespResult) {
       if (!sellRespResult.data) {
-        setSellData(null);
+        setSellData([]);
         return;
       }
 
@@ -57,7 +57,7 @@ const AnalyticsPage = () => {
       return;
     }
 
-    setSellData(null);
+    setSellData([]);
   }
 
   useEffect(() => {

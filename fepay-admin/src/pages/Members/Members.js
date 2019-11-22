@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Paper, Table, TableBody, TableCell, TableHead, TableRow, Button } from '@material-ui/core'
-import { FaUser } from 'react-icons/fa'
+import { FaUser, FaBarcode } from 'react-icons/fa'
 import Axios from 'axios';
 
 import { SERVER } from '../../config/server.json';
@@ -15,26 +15,31 @@ const AnalyticsPage = () => {
     updateData();
   }, []);
 
-  const updateData = async () => {
+  const updateData = () => {
     const requestUrl = `${SERVER}/users`;
-    const respData = await Axios.post(requestUrl, {
-      
-    }, {
+    Axios.get(requestUrl, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access')}`,
       },
       timeout: 3000,
-    }).catch(() => {
-      window.location = '/';
-    });
+    })
+      .then((respData) => {
+        if (respData) {
+          const memberArray = respData.data;
+          if (Array.isArray(memberArray)) {
+            setMemberData(memberArray);
+            return;
+          }
+        }
 
-    const memberArray = respData.data;
-    if(Array.isArray(memberArray)) {
-      setMemberData(memberArray);
-    }
+        setMemberData([]);
+      })
+      .catch(() => {
+        // window.location = '/';
+      });
   }
 
-  const handleMoneyChange = async (memberId) => {
+  const handleMoneyChange = (memberId) => {
     const result = prompt(`${memberId}의 잔고를 수정합니다.\n설정할 잔고를 입력하세요!`);
 
     if (!result) {
@@ -42,13 +47,13 @@ const AnalyticsPage = () => {
       return;
     }
 
-    if(result === "") {
+    if (result === "") {
       alert("설정할 잔고를 입력하세요.");
       return;
     }
 
     const requestUrl = `${SERVER}/user/balance?user_id=${memberId}`;
-    await Axios.put(requestUrl, {
+    Axios.put(requestUrl, {
       balance: result,
     }, {
       headers: {
@@ -56,11 +61,24 @@ const AnalyticsPage = () => {
       }
     });
 
-    await updateData();
+    updateData();
   }
 
   const handleUserDelete = (memberId) => {
-    alert(`사용자 삭제: ${memberId}`);
+    const confirmResult = window.confirm(`정말로 ${memberId} 회원을 삭제하시겠습니까?`);
+    if (confirmResult === true) {
+      const requestUrl = `${SERVER}/user?user_id=${memberId}`;
+      Axios.delete(requestUrl, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
+        },
+        timeout: 3000,
+      }).catch(() => {
+        alert("작업 실패!");
+      });
+
+      updateData();
+    }
   }
 
   return (
@@ -69,13 +87,19 @@ const AnalyticsPage = () => {
         <div className='logo' onClick={() => {
           window.location.href = '/analytics';
         }}>
-          <img src={Logo} className='image' alt='logo'/>
+          <img src={Logo} className='image' alt='logo' />
           <span className='text'>FEPAY ADMIN</span>
         </div>
         <div className='memberMgnt' onClick={() => {
           window.location.href = '/members';
         }}>
           회원 관리
+        </div>
+      </div>
+      <div className='topBar-secound'>
+        <div className='content-topbar'>
+          <FaBarcode />
+          &nbsp;<span>행사 코드: <strong>{localStorage.getItem('eventID')}</strong></span>
         </div>
       </div>
       <br />
@@ -101,16 +125,16 @@ const AnalyticsPage = () => {
                   memberData.map((row, index) => (
                     <TableRow key={index}>
                       <TableCell component="th" scope="row">
-                        {row.user_id}
+                        {row.id}
                       </TableCell>
                       <TableCell align="right">{row.name}</TableCell>
                       <TableCell align="right">{row.phone}</TableCell>
-                      <TableCell align="right">{row.balance}</TableCell>
+                      <TableCell align="right">{row.balance} 원</TableCell>
                       <TableCell align="right">
-                        <Button variant="contained" color='inherit' className='btn-margin' onClick={() => {handleMoneyChange(row.user_id)}}>
+                        <Button variant="contained" color='inherit' className='btn-margin' onClick={() => { handleMoneyChange(row.id) }}>
                           잔고 수정
                         </Button>
-                        <Button variant="contained" color='secondary' onClick={() => {handleUserDelete(row.user_id)}}>
+                        <Button variant="contained" color='secondary' onClick={() => { handleUserDelete(row.id) }}>
                           회원 삭제
                         </Button>
                       </TableCell>

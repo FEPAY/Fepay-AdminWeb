@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import Logo from '../../Assets/Logo.png';
-import Moment from 'moment';
+import Moment from 'moment-timezone';
 import Axios from 'axios';
 import { SERVER } from '../../config/server.json';
 import './Register.scss'
@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [name, setName] = useState(null);
   const [phone, setPhone] = useState(null);
   const [eventName, setEventName] = useState(null);
-  const [eventEndDate, setEventEndDate] = useState(Moment().format('YYYY-MM-DD'));
+  const [eventEndDate, setEventEndDate] = useState(Moment(new Date()).tz('Asia/Seoul').format('YYYY-MM-DD'));
 
   const handleRegister = async () => {
     if (!email || !password || !name || !eventName || !phone) {
@@ -29,10 +29,10 @@ const LoginPage = () => {
     }
 
     console.log(eventEndDate);
-    console.log(Moment.duration(Moment(new Date()).diff(Moment(eventEndDate, 'YYYY-MM-DD'))).asHours());
+    console.log(Moment.duration(Moment(new Date()).diff(Moment(eventEndDate, 'YYYY-MM-DD').tz('Asia/Seoul'))).asHours());
 
     if(Moment.duration(Moment(new Date()).diff(Moment(eventEndDate, 'YYYY-MM-DD'))).asHours() >= 0) {
-      alert('마감 날자는 오늘 날자보다 작을 수 없습니다.');
+      alert('마감 날자는 오늘 날자보다 같거나 작을 수 없습니다.');
       return;
     }
 
