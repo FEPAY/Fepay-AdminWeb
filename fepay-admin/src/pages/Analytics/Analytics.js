@@ -44,8 +44,11 @@ const AnalyticsPage = () => {
       },
       timeout: 3000,
     }).catch(() => {
+      console.log('CATCH');
       // window.location.href = '/';
     });
+
+    console.log(sellRespResult);
 
     if (sellRespResult) {
       if (!sellRespResult.data) {
@@ -53,7 +56,7 @@ const AnalyticsPage = () => {
         return;
       }
 
-      setTopData(sellRespResult.data);
+      setSellData(sellRespResult.data);
       return;
     }
 
