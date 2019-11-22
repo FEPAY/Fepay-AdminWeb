@@ -15,7 +15,7 @@ const App = () => {
           if(localStorage.getItem('access')) {
             return <AnalyticsPage />
           } else {
-            return <AnalyticsPage />
+            return <LoginPage />
           }
         }} />
         <Route path='/register' component={Register} />
@@ -23,7 +23,7 @@ const App = () => {
           if(localStorage.getItem('access')) {
             return <MembersPage />
           } else {
-            return <MembersPage />
+            return <LoginPage />
           }
         }} />
       </Switch>
