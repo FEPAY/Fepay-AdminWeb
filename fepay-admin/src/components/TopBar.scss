@@ -1,0 +1,64 @@
+.topBar {
+  display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 3.5rem;
+    background-color: #212121;
+    // padding: 0.5rem;
+    // box-shadow: 0.1rem 0.2rem rgba($color: #fafafa, $alpha: 0.5);
+    font-weight: bold;
+    color: #fafafa;
+
+    &-secound {
+      display: flex;
+      align-items: center;
+      width: 100vw;
+      height: 3.5rem;
+      background-color: #fafafa;
+      // padding: 0.5rem;
+      box-shadow: 0.1rem 0.2rem rgba($color: #fafafa, $alpha: 0.5);
+      font-weight: bold;
+      color: #212121;
+
+      & .content-topbar {
+        display: flex;
+        width: 100%;
+
+        margin-left: 1.8rem;
+
+        align-items: center;
+
+        & h4 {
+          margin-left: 0.5rem;
+        }
+      }
+    }
+
+    & .logo {
+      display: flex;
+      margin-left: 1.5rem;
+      line-height: 2rem;
+      cursor: pointer;
+
+      & .text {
+        margin-left: 1rem;
+      }
+
+      & .image {
+        height: 2rem;
+      }
+
+      &:hover {
+        color: #42a5f5;
+      }
+    }
+
+    & .memberMgnt {
+      margin-left: 1.5rem;
+      cursor: pointer;
+
+      &:hover {
+        color: #42a5f5;
+      }
+    }
+}

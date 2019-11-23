@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Paper, Table, TableBody, TableCell, TableHead, TableRow, Button } from '@material-ui/core'
-import { FaUser, FaBarcode } from 'react-icons/fa'
+import { FaUser } from 'react-icons/fa'
+import TopBar from '../../components/TopBar';
 import Axios from 'axios';
 
 import { SERVER } from '../../config/server.json';
 import './Members.scss';
-import Logo from '../../Assets/Logo.png';
-
 
 const AnalyticsPage = () => {
   const [memberData, setMemberData] = useState([]);
@@ -83,25 +82,7 @@ const AnalyticsPage = () => {
 
   return (
     <div className='Members-base'>
-      <div className='topBar'>
-        <div className='logo' onClick={() => {
-          window.location.href = '/analytics';
-        }}>
-          <img src={Logo} className='image' alt='logo' />
-          <span className='text'>FEPAY ADMIN</span>
-        </div>
-        <div className='memberMgnt' onClick={() => {
-          window.location.href = '/members';
-        }}>
-          회원 관리
-        </div>
-      </div>
-      <div className='topBar-secound'>
-        <div className='content-topbar'>
-          <FaBarcode />
-          &nbsp;<span>행사 코드: <strong>{localStorage.getItem('eventID')}</strong></span>
-        </div>
-      </div>
+      <TopBar />
       <br />
       <div className='content'>
         <div className='section'>

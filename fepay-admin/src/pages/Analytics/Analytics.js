@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
-import { FaBarcode, FaMoneyBill, FaMoneyCheckAlt } from 'react-icons/fa'
+import { FaMoneyBill, FaMoneyCheckAlt } from 'react-icons/fa'
+import TopBar from '../../components/TopBar';
 import Axios from 'axios';
 import Moment from 'moment';
-import { SERVER } from '../../config/server.json';
 
-import Logo from '../../Assets/Logo.png';
+import { SERVER } from '../../config/server.json';
 import './Analytics.scss';
 
 const AnalyticsPage = () => {
@@ -75,23 +75,7 @@ const AnalyticsPage = () => {
 
   return (
     <div className='Analytics-base'>
-      <div className='topBar'>
-        <div className='logo'>
-          <img src={Logo} className='image' alt='logo' />
-          <span className='text'>FEPAY ADMIN</span>
-        </div>
-        <div className='memberMgnt' onClick={() => {
-          window.location.href = '/members';
-        }}>
-          회원 관리
-        </div>
-      </div>
-      <div className='topBar-secound'>
-        <div className='content-topbar'>
-          <FaBarcode />
-          &nbsp;<span>행사 코드: <strong>{localStorage.getItem('eventID')}</strong></span>
-        </div>
-      </div>
+      <TopBar />
       <div className='content'>
         <div className='section'>
           <div className='section-title'>
@@ -151,6 +135,8 @@ const AnalyticsPage = () => {
                         {row.id}
                       </TableCell>
                       <TableCell align="right">{row.recipient}</TableCell>
+                      {/* <TableCell align="right">{row.sender}</TableCell>
+                      <TableCell align="right">{Moment(row.matchedAt).format('YYYY-MM-DD HH:mm:ss')}</TableCell> */}
                       <TableCell align="right">{row.sender !== null ? row.sender : '구매 대기'}</TableCell>
                       <TableCell align="right">{row.sender !== null ? Moment(row.matchedAt).format('YYYY-MM-DD HH:mm:ss') : '구매 대기'}</TableCell>
                       <TableCell align="right">{`${row.amount} 원`}</TableCell>
